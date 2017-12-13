@@ -1,0 +1,113 @@
+<html>
+	<head>
+		<meta name="keywords" content="Meet other parents, find people, parents, my kids friends" />
+		<meta name="description" content="Meet other people here." />
+		<title>Meet our community of Parents</title>
+		<script type="text/javascript">
+
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-30258000-1']);
+			_gaq.push(['_trackPageview']);
+
+			(function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+
+		</script>
+	</head>
+	<div class='topper'>
+		<%= render 'topmenu' %>
+	</div>
+	<%= render 'layouts/header' %>
+	<body>
+		<div class="content_body">
+			<div class="content_interior"><div class="left_column"><div class="navigation">
+				<div id="avatar">
+					 <img src="assets/family.png" alt="sample 2" />
+				</div>
+			<br>
+		<%= render 'menu' %> 
+			</div>
+		<div class="navigationbtm"></div>
+		 <br />
+		</div>
+			<div class="right_column">
+				<p>You can search for other members by typing their first name, last name, user name, full name, or state.</p>
+				<%= pluralize(@users.count, "Member") %> out of <%= pluralize(@all_users.count, "member") %>
+				<ul id="user_list">
+					<div class='flash'>
+						<%= flash_helper %>
+					</div>
+					<%= form_tag users_path, :method => "get" do %>
+						<p>
+							<%= text_field_tag :search, params[:search] %>
+							<%= submit_tag "Search", :name => nil %>
+						</p>
+					<% end %>
+					<% if current_user %>
+						<% @users.each do |user| %>
+								<li <% if @users.first == user %> class="first"<% end %>>
+									<% if user.avatar.file? %>
+										<%= image_tag user.avatar.url(:thumb) %>
+									<% else %>
+										<img src="assets/nopic2.png">
+									<% end %>
+								<div class="user_message_container">
+									<%= link_to user.username.capitalize, user.username %>
+									<% if @online %>
+										<font color='red'>Online</font><br />
+									<% end %>
+									<% if user.county.present? && user.state.present? %>
+										<b><%= h user.county %>, <%= user.state %></b>
+									<% end %>
+									<div class="button">
+										<% unless user == current_user || current_user.requested_friends.include?(user) || current_user.friends.include?(user) || current_user.pending_friends.include?(user) %>
+											<%= link_to "Add", friendships_path(:friend_id => user), :method => :post %>
+										<% end %>
+									</div><br />
+									<%= h user.about_us %>
+							</div>
+							<div class="clear"></div>
+							</li>
+					<% end %>
+				<% end %>
+
+					<% unless current_user %>
+						<% @users.each do |user| %>
+							<li <% if @users.first == user %>class="first"<% end %>>
+										<% if user.avatar.file? %>
+											<%= image_tag user.avatar.url(:thumb) %>
+										<% else %>
+											<img src="/assets/nopic2.gif">
+										<% end %>
+										<div class="user_message_container">
+											<%= link_to user.username.capitalize, user.username %>
+											<% if user.state.present? && user.county.present? %>
+												<b><%= h user.county %>, <%= user.state %></b><br />
+												<%= h user.about_us %>
+											<% else %>
+												<b><%= h user.state %></b>
+											<% end %>
+									</div>
+									<div class="clear"></div>
+						<% end %>
+							</li>
+					<% end %>
+				<% unless params[:search] %>
+					<%= will_paginate @users %>
+				<% end %>
+				<% if params[:search] && params[:search].empty? %>
+					<%= will_paginate @users %>
+				<% end %>
+		</div>
+			<div class='right_side'>
+				
+			</div>
+		<br clear="all" /></div>
+		<div class='footer' align='center'>
+		</div>
+		<%= render 'users/footer' %>
+	</body>
+</html>

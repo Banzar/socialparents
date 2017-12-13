@@ -1,0 +1,69 @@
+<html>
+	<head>
+		<meta name="description" content="This is an email sent from someone else." />
+		<title><%= @message.subject %></title>
+		<script type="text/javascript">
+
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-30258000-1']);
+			_gaq.push(['_trackPageview']);
+
+			(function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+
+		</script>
+	</head>
+	<div class='topper'>
+		<%= render 'users/topmenu' %>
+	</div>
+	<%= render 'layouts/header' %>
+	<body>
+		<div class="content_body">
+			<div class="content_interior"><div class="left_column"><div class="navigation">
+			<div id="avatar">
+				<h1><% if current_user.first_name.present? && current_user.last_name.present? %>
+					<%= current_user.first_name.capitalize %> <%= current_user.last_name.capitalize %></h1>
+				<% else %>
+					<%= current_user.username.capitalize %></h1>
+				<% end %>
+				<%= image_tag current_user.avatar.url(:small) %>
+			</div>
+			<br>
+		<%= render 'users/menu' %>
+		</div>
+
+		<div class="navigationbtm"></div>
+		 <br />
+		 <img src="/assets/family.png" alt="sample 2" />
+		 </div>
+				<div class="right_column">
+					<%= render 'users/mail_menu' %>
+					<div class='flash'>
+						<%= flash_helper %>
+					</div>
+					<div class='message_container'>
+						<h7><%=h @message.subject %></h7>
+
+						<p><strong>From:</strong> <%=h @message.author.username %></p>
+						<p><strong>To:</strong> <%=h @message.recipients.map(&:username).to_sentence %></p>
+						<p><strong>Received:</strong> <%= @message.created_at.to_s(:long) %></p>
+
+						<pre width="400"><%=h @message.body %></pre>
+						<p>
+							<%= link_to "Reply", reply_message_path(@message) %>||
+							<%= link_to "Delete", message_path(@message), :method => "delete" %>
+						</p>
+					</div>
+				</div>
+			<div class='right_side'>
+				
+			</div>
+		<br clear="all" /></div>
+		<div class='footer' align='center'>
+		</div>
+		<%= render 'users/footer' %>
+	</body>
+</html>

@@ -1,0 +1,73 @@
+<html>
+	<head>
+		<meta name="keywords" content="Parents social network, parenting, play dates, kids friends" />
+		<meta name="description" content="Social Network for parents, log in to parenting network to meet other parents to arrange playdates for your kids." />
+		<title>Social Parents - Log In!</title>
+		<script type="text/javascript">
+
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-30258000-1']);
+			_gaq.push(['_trackPageview']);
+
+			(function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+
+		</script>
+	</head>
+	<div class='topper'>
+		<%= render 'users/topmenu' %>
+	</div>
+	<%= render 'layouts/header' %>
+	<body>
+		<div class="content_body">
+			<div class="content_interior"><div class="left_column"><div class="navigation">
+			<div id="avatar">
+				 <img src="/assets/family.png" alt="sample 2" />
+			</div>
+			<br>
+		<%= render 'users/menu' %>
+		</div>
+
+		<div class="navigationbtm"></div>
+		 <br />
+		 </div>
+		<div class="right_column">
+			<div class="sign_up_left">
+				<h1>Welcome to Social Parents</h1>
+				<p>Ever want an easy way to arrange play dates with other parents. Here you are able to meet other parents and arrange those play dates. <b>Social Parents</b> was built by parents for parents.<br /><br /> Our children need other kids to interact with. Sometimes it can be difficult to make friends with children the same age as your own children, this is why <b>Social Parents</b> is here. Sign up, make friends, arrange play dates, get help with parenting matters. It is as easy as that here.<br /><br /> If you like what you see and you want to help us expand, tell your friends about us, and have them do the same. You can also press the Google +1 button to recommend this be easier to find on <a href='http://google.com' target='_blank'>Google</a>, on the right side there on each of our pages.</p>
+			</div>
+			<div class="sign_up_right">
+				<h1>Log in</h1>
+				<p>Don't have an account yet? <%= link_to "Sign up!", sign_up_path %></p>
+				<div class='flash'>
+					<%= flash_helper %>
+				</div>
+					<%= form_tag sessions_path do -%>
+						<p>
+						<%= label_tag :email %> or Username<br />
+							<%= text_field_tag :email, params[:email]%>
+						</p>
+						<p>
+							<%= label_tag :password %><br />
+							<%= password_field_tag :password %>
+						</p>
+						<p class="button"><%= submit_tag "Log in" %></p>
+					<% end %>
+				</div>
+			</div>
+			<div class='right_side'>
+				
+			</div>
+		<br clear="all" /></div>
+		<div class='footer' align='center'>
+		</div>
+		<%= render 'users/footer' %>
+	</body>
+</html>
+
+
+
+

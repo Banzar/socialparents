@@ -1,0 +1,21 @@
+<% unless @user.requested_friends.empty? %>
+<h3>Friends requested</h3>
+<ul id="user_list">
+	<% @user.requested_friends.each do |user| %>
+		<li>
+			<% if user.avatar.file? %>
+				<%= link_to image_tag(user.avatar.url(:thumb).to_s) %>
+			<% else %>
+				<img src="assets/images/nopic2.gif">
+			<% end %>
+			<div class="user_message_container">
+				<%=h link_to user.username.capitalize, user.username %>
+				<div class="button">
+					<%= link_to '[Cancel]', friendship_path(:user_id => current_user, :id => user), :method => :delete, :confirm => 'Are you sure?' %>
+				</div>
+				<%= user.about_us %>
+				</div><div class="clear"></div>
+		</li>
+	<% end %>
+</ul>
+<% end %>

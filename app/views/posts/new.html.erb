@@ -1,0 +1,55 @@
+<html>
+	<head>
+		<meta name="keywords" content="Post a blog, ask for parenting advise" />
+		<meta name="description" content="This is where you ask for advise about anything having to do with your children, or parenting." />
+		<title>Post - Ask for help when needed</title>
+		<script type="text/javascript">
+
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-30258000-1']);
+			_gaq.push(['_trackPageview']);
+
+			(function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+
+		</script>
+	</head>
+	<div class='topper'>
+		<%= render 'users/topmenu' %>
+	</div>
+	<%= render 'layouts/header' %>
+	<body>
+		<div class="content_body">
+			<div class="content_interior"><div class="left_column"><div class="navigation">
+			<div id="avatar">
+				<img src='/assets/family.png'>
+			</div>
+			<br>
+		<%= render 'users/menu' %>
+		 </div>
+
+		<div class="navigationbtm"></div>
+		 <br />
+		 </div>
+				<div class="right_column">
+					<div class='flash'>
+						<%= flash_helper %>
+					</div>
+					<h1>New post</h1>
+
+					<%= render 'form' %>
+
+					<%= link_to 'Back', posts_path %>
+				</div>
+			<div class='right_side'>
+				
+			</div>
+		<br clear="all" /></div>
+		<div class='footer' align='center'>
+		</div>
+		<%= render 'users/footer' %>
+	</body>
+</html>

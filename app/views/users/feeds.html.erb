@@ -1,0 +1,80 @@
+<html>
+	<head>
+		<meta name="keywords" content="status updates, parenting thoughts, parenting status" />
+		<meta name="description" content="See all friends updated status." />
+		<title>Friends Statuses</title>
+		<script type="text/javascript">
+
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-30258000-1']);
+			_gaq.push(['_trackPageview']);
+
+			(function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+
+		</script>
+	</head>
+	<div class='topper'>
+		<%= render 'topmenu' %>
+	</div>
+	<%= render 'layouts/header' %>
+	<body>
+		<div class="content_body">
+			<div class="content_interior"><div class="left_column"><div class="navigation">
+			<div id="avatar">
+				<h1><% if current_user.first_name.present? && current_user.last_name.present? %>
+					<%= current_user.first_name %> <%= current_user.last_name %></h1>
+				<% else %>
+					<%= current_user.username %></h1>
+				<% end %>
+				<%= image_tag current_user.avatar.url(:small) %>
+			</div>
+		<div class='flash'>
+			<%= flash_helper %>
+		</div>
+			<br>
+		<%= render 'menu' %>
+		</div>
+
+		<div class="navigationbtm"></div>
+		 <br />
+		 <img src="assets/family.png" alt="sample 2" />
+		 </div>
+				<div class="right_column">
+					<h3>Whats on your mind?</h3>
+					<%= form_for Feed.new do |f| %>
+						<div id="new_feed_form">
+							<%= f.text_area :message %>
+							<div id="latest_message">
+								<% if @last_feed.present? %>
+									<%= @last_feed.message %>
+									<div class="time_ago">
+										<%= time_ago_in_words @last_feed.created_at %> ago
+									</div>
+								<% else %>
+									Your latest posting will be shown here.
+									<%= time_ago_in_words @user.created_at %> ago
+								<% end %>
+							</div>
+							<div id="submit_button_container">
+								<%= f.submit "Post" %>
+							</div>
+							<div class="clear"></div>
+						</div>
+					<% end %>
+				<br />
+				<%= render :partial => 'feeds_list', :locals => { :feeds => @feeds } %>
+			</div>
+			<div class='right_side'>
+				
+			</div>
+		<br clear="all" /></div>
+		<div class='footer' align='center'>
+		</div>
+		<%= render 'users/footer' %>
+	</body>
+</html>
+

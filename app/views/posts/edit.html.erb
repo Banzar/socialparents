@@ -1,0 +1,68 @@
+<html>
+	<head>
+		<script type="text/javascript">
+
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-30258000-1']);
+			_gaq.push(['_trackPageview']);
+
+			(function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+
+		</script>
+	</head>
+	<div class='topper'>
+		<%= render 'users/topmenu' %>
+	</div>
+	<%= render 'layouts/header' %>
+	<body>
+		<div class="content_body">
+			<div class="content_interior"><div class="left_column"><div class="navigation">
+			<div id="avatar">
+				<h1>Families stick Together</h1>
+				<img src='/assets/family.png'>
+			</div>
+			<br>
+		<%= render 'users/menu' %>
+
+		</div>
+
+		<div class="navigationbtm"></div>
+		 <br />
+		 <img src="/assets/family.png" alt="sample 2" />
+		 </div>
+				<div class="right_column">
+					<div class='flash'>
+						<%= flash_helper %>
+					</div>
+					<% if current_user = @post.user %>
+						<h5>Edit your post</h5>
+						<div class="hr"></div>
+						<div class='listings'>
+							<h1>Editing post</h1>
+
+							<%= render 'form' %>
+
+							<%= link_to 'Show', @post %> |
+							<%= link_to 'Back', posts_path %>
+					<% else %>
+						<h5>You cannot edit this post</h5>
+						<div class="hr"></div>
+						<h7><%= @post.title %></h7><br />
+								<%= @post.text %>
+					<% end %>
+						</div>
+			
+			</div>
+			<div class='right_side'>
+				
+			</div>
+		<br clear="all" /></div>
+		<div class='footer' align='center'>
+		</div>
+		<%= render 'users/footer' %>
+	</body>
+</html>

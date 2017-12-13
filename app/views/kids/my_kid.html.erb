@@ -1,0 +1,98 @@
+<% if @child.user = current_user %>
+	<html>
+		<head>
+		<meta name="keywords" content="my kids, add kids to my profile, my children, kiddos" />
+		<meta name="description" content="This is where to tell about your kids, this way their friends from school may find them on here." />
+		<title>My kids - showing off our children</title>
+			<script type="text/javascript">
+
+				var _gaq = _gaq || [];
+				_gaq.push(['_setAccount', 'UA-30258000-1']);
+				_gaq.push(['_trackPageview']);
+
+				(function() {
+					var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+					ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+					var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+				})();
+
+			</script>
+		</head>
+		<div class='topper'>
+		<%= render 'users/topmenu' %>
+		</div>
+		<%= render 'layouts/header' %>
+		<body>
+			<div class="content_body">
+				<div class="content_interior"><div class="left_column"><div class="navigation">
+					<div id="avatar">
+						 <img src="/assets/family.png" alt="sample 2" />
+					</div>
+				<br>
+			<%= render 'users/menu' %> 
+				</div>
+			<div class="navigationbtm"></div>
+			 <br />
+			</div>
+				<div class="right_column">
+					<div class="event_form">
+						<div class='flash'>
+							<%= flash_helper %>
+						</div>
+						<div class='default_left'>
+							<%= form_for @child, :html => { :multipart => true } do |f| %>
+								<p>
+									<%= f.label :photo %><br>
+									<%= f.file_field :photo %>
+								</p>
+								<p>
+									<%= f.radio_button :sex, "Male"	%>
+									<%= f.label :sex, "Male" %>
+									<%= f.radio_button :sex, "Female" %>
+									<%= f.label :sex, "Female" %>
+								</p>
+								<p>
+									<%= f.label :first_name %><br />
+									<%= f.text_field :first_name %>
+								</p>
+								<p>
+									<%= f.label :last_name %><br />
+									<%= f.text_field :last_name %>
+								</p>
+								<p>
+									<%= f.label :birthday %><br />
+									<%= f.date_select :birthday, :start_year => Time.now.year - 25, :end_year => Time.now.year, :order => [:month, :day, :year] %>
+								</p>
+								<p>
+									<%= f.label :grade %><br />
+									<%= f.select :grade, child_grade %>
+								</p>
+								<p>
+									<%= f.label :school %><br />
+									<%= f.text_field :school %>
+								</p>
+								<p>
+									<%= f.label :hobbies %><br />
+									<%= f.text_field :hobbies %>
+								</p>
+								<p>
+									<%= f.submit "Update" %>
+								</p>
+							<% end %>
+						</div>
+
+						</div><div class='clear'></div>
+					</div>
+				</div>
+			<div class='right_side'>
+				
+			</div>
+			<br clear="all" /></div>
+		<div class='footer' align='center'>
+		</div>
+		<%= render 'users/footer' %>
+		</body>
+	</html>
+<% else %>
+	<% redirect_to root_url %>
+<% end %>

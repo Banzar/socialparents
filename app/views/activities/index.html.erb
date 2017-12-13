@@ -1,0 +1,65 @@
+<html>
+	<head>
+		<meta name="keywords" content="family fun, family activities, fun for families, family friendly fun, things to do with family" />
+		<meta name="description" content="A place where you can review some activities that people do with their families for fun, and also post some that you do with yours for others to be able to try out." />
+		<title>Family fun - find activities for the whole family</title>
+		<script type="text/javascript">
+
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-30258000-1']);
+			_gaq.push(['_trackPageview']);
+
+			(function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+
+		</script>
+	</head>
+	<div class='topper'>
+		<%= render 'users/topmenu' %>
+	</div>
+	<%= render 'layouts/header' %>
+	<body>
+			<div class="content_body">
+				<div class="content_interior"><div class="left_column"><div class="navigation">
+					<div id="avatar">
+						<img src='/assets/family.png'>
+					</div>
+				<br>
+			<%= render 'users/menu' %>
+			<ul class='markermenu'>
+				<li class='markermenu'><%= link_to "Create New Activity", new_activity_url %></li>
+			</ul>
+			</div>
+
+			<div class="navigationbtm"></div>
+			 <br />
+			 </div>
+					<div class="right_column">
+						<div class='flash'>
+							<%= flash_helper %>
+						</div>
+						<h5>Activities For Families</h5>
+					<p>These are all ideas of things to do with the family for fun. Having a family night can be very important for a family. This is known to help the children learn from doing things with the family, and learn to play games by the rules. These are only a couple reasons for why Family fun activities can be so important. Add too these if you do not see something that you and your family do. It will start off small, but in time this will grow to many ideas and tips.</p>
+					<div class="hr"></div>
+					<div class='listings'>
+						<% for activity in @activities %>
+							<p>
+								<h7><%=h activity.title %></h7><br />
+								<%=h activity.description %>
+							</p>
+						<% end %>
+						<%= will_paginate @activities %>
+					</div>
+				</div>
+				<div class='right_side'>
+					
+				</div>
+			<br clear="all" /></div>
+		<div class='footer' align='center'>
+		</div>
+		<%= render 'users/footer' %>
+	</body>
+</html>

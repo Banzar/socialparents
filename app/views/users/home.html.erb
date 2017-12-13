@@ -1,0 +1,106 @@
+<html>
+	<head>
+		<meta name="keywords" content="Post a blog, ask for parenting advise" />
+		<meta name="description" content="This is where you ask for advise about anything having to do with your children, or parenting." />
+		<script type="text/javascript">
+
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-30258000-1']);
+			_gaq.push(['_trackPageview']);
+
+			(function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+
+		</script>
+	</head>
+	<div class='topper'>
+		<%= render 'topmenu' %>
+	</div>
+		<%= render 'layouts/header' %>
+	<body>
+		<div class="content_body">
+  		<div class="content_interior">
+				<div class="left_column">
+					<div class="navigation">
+						<div id="avatar">
+							<h1><%= current_user.username.capitalize %></h1>
+								<%= image_tag current_user.avatar.url(:small) %>
+								<p><%= useless_info %></p>
+						</div>
+							<% unless current_user.pending_friends.empty? %>
+								<div class='request'>
+									<%= link_to pluralize(current_user.pending_friends.length, "Friend Request"), friends_url %>
+								</div>
+							<% end %>
+						<br>
+							<%= render 'menu' %><br />
+							<% unless @events.count == 0 %>
+								<b>Social Events:</b>
+									<% @events.each do |event| %>
+										<div class="user_events">
+											<li>
+												<div class='button'>
+													<%= event.date %>
+												</div>
+												<div class='event_name'>
+													<%= link_to event.user.username.capitalize, "/#{event.user.username}" %> :
+													<%= link_to event.event_name, "/event/#{event.id}" %>
+												</div><div class='clear'></div>
+											</li>
+										</div>
+									<% end %>
+								<% end %>
+							</div>
+							<div class="navigationbtm"></div>
+ 								<br />
+ 								<img src="/assets/family.png" alt="sample 2" />
+ 		</div>
+    <div class="right_column">
+			<h3>Whats on your mind?</h3>
+			<%= form_for Feed.new do |f| %>
+				<div id="new_feed_form">
+					<%= f.text_area :message %>
+					<div id="latest_message">
+						<% if @last_feed.present? %>
+							<%= @last_feed.message %>
+							<div class="time_ago">
+								<%= time_ago_in_words @last_feed.created_at %> ago
+							</div>
+						<% else %>
+							Your latest posting will be shown here.
+							<%= time_ago_in_words @user.created_at %> ago
+						<% end %>
+					</div>
+					<div id="submit_button_container">
+						<%= f.submit "Post" %>
+					</div>
+					<div class="clear"></div>
+				</div>
+		<div class="hr"></div>
+			<% end %>
+		<div class='flash'>
+			<%= flash_helper %>
+		</div>
+		<br />
+		<% if @feeds.count == 0 %>
+			<%= User.find(1).about_us %>
+		<% end %>
+		<%= render :partial => 'feeds_list', :locals => { :feeds => @feeds } %>
+			<% if @feeds.count >= 8 %>
+				<p><%= link_to "Read all feeds", feeds_url %></p>
+			<% end %>
+  </div>
+	<div class='right_side'>
+		
+	</div>
+</div>
+<br clear="all" /></div>
+		<div class='footer' align='center'>
+		</div>
+		<%= render 'users/footer' %>
+</body>
+</html>
+

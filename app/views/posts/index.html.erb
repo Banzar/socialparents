@@ -1,0 +1,79 @@
+<html>
+	<head>
+		<meta name="keywords" content="parent blog, parenting blog, help with kids, advise on parenting, parenting advise" />
+		<meta name="description" content="Post something here if you are needing help with any parenting situation." />
+		<title>Parental Blog - Advise and Chat</title>
+		<script type="text/javascript">
+
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-30258000-1']);
+			_gaq.push(['_trackPageview']);
+
+			(function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+
+		</script>
+	</head>
+	<div class='topper'>
+		<%= render 'users/topmenu' %>
+	</div>
+	<%= render 'layouts/header' %>
+	<body>
+		<div class="content_body">
+			<div class="content_interior"><div class="left_column"><div class="navigation">
+			<div id="avatar">
+				<img src='/assets/family.png'>
+			</div>
+			<br>
+		<%= render 'users/menu' %>
+		 </div>
+
+		<div class="navigationbtm"></div>
+		 <br />
+		 </div>
+				<div class="right_column">
+					<h5>Parenting Blog</h5>
+					<p>Here you can get advise about your children, or parenting techniques from other parents. Who knows better, then parents themselves. If you have anything going on that you have not had to handle yet, and don't know what to do, ask the question. You are not the only person wondering what to do. Keep the blog family friendly though please, this site is for families and should remain ok for even children to read. Thanks.	
+					<div class='hr'></div> 
+					<h1>Posts</h1>
+
+					<table border= 1px, width= 500px>
+						<tr>
+							<th>Title</th>
+							<th>Text</th>
+							<th>Posted</th>
+							<th></th>
+						</tr>
+
+					<% @posts.each do |post| %>
+						<tr>
+							<td><%= link_to post.title, post %></td>
+							<td><%= truncate post.text %></td>
+							<td><%= time_ago_in_words post.created_at %></td>
+							<td><%= link_to 'Show', post %>
+							<% if post.user = current_user %>
+								| <%= link_to 'Edit', edit_post_path(post) %> |
+								<%= link_to 'Delete', post, :confirm => 'Are you sure?', :method => :delete %></td>
+							<% else %>
+								</td>
+							<% end %>
+						</tr>
+					<% end %>
+					</table>
+					<%= will_paginate @post %>
+					<br />
+
+					<%= link_to 'New Post', new_post_path %>
+				</div>
+			<div class='right_side'>
+				
+			</div>
+		<br clear="all" /></div>
+		<div class='footer' align='center'>
+		</div>
+		<%= render 'users/footer' %>
+	</body>
+</html>

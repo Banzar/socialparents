@@ -1,0 +1,55 @@
+<html>
+	<head>
+		<meta name="keywords" content="social parents friends" />
+		<meta name="description" content="This is where you can see all of your friends on Social Parents" />
+		<title>My friends</title>
+		<script type="text/javascript">
+
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-30258000-1']);
+			_gaq.push(['_trackPageview']);
+
+			(function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+
+		</script>
+	</head>
+	<div class='topper'>
+		<%= render 'topmenu' %>
+	</div>
+	<%= render 'layouts/header' %>
+	<body>
+		<div class="content_body">
+			<div class="content_interior"><div class="left_column"><div class="navigation">
+			<div id="avatar">
+				 <img src="assets/family.png" alt="sample 2" />
+			</div>
+		<div class='flash'>
+			<%= flash_helper %>
+		</div>
+		<br>
+		<%= render 'menu' %>
+		</div>
+
+		<div class="navigationbtm"></div>
+		 <br />
+		 </div>
+				<div class="right_column">
+		<%= render 'friends' %>
+		<br />
+		<%= render 'irequest' %>
+		<br />
+		<%= render 'requestme' %>
+		</div>
+			<div class='right_side'>
+				
+			</div>
+		<br clear="all" /></div>
+		<div class='footer' align='center'>
+		</div>
+		<%= render 'users/footer' %>
+	</body>
+</html>

@@ -1,0 +1,90 @@
+<html>
+	<head>
+		<title><%= @event.event_name %></title>
+		<script type="text/javascript">
+
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-30258000-1']);
+			_gaq.push(['_trackPageview']);
+
+			(function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+
+		</script>
+	</head>
+	<div class='topper'>
+		<%= render 'topmenu' %>
+	</div>
+	<%= render 'layouts/header' %>
+	<body>
+		<%= render 'layouts/header' %>
+		<div class="content_body">
+			<div class="content_interior"><div class="left_column"><div class="navigation">
+			<div id="avatar">
+				<h1><% if @user.first_name.present? && @user.last_name.present? %>
+					<%= @user.first_name.capitalize %> <%= @user.last_name.capitalize %></h1>
+				<% else %>
+					<%= @user.username.capitalize %></h1>
+				<% end %>
+				<%= image_tag @user.avatar.url(:small) %>
+			</div>
+			<br>
+		<%= render 'menu' %>
+		</div>
+
+		<div class="navigationbtm"></div>
+		 <br />
+		 <img src="/assets/family.png" alt="sample 2" />
+		 </div>
+				<div class="right_column">
+					<% if @event.user == current_user %>
+					<div id="event_form">
+						<div class='flash'>
+							<%= flash_helper %>
+						</div>
+							<%= form_for @event do |f| %>
+								<p>
+									<%= f.label :event_name %><br>
+									<%= f.text_field :event_name %>
+								</p>
+								<p>
+									<%= f.label :event_description %><br>
+									<%= f.text_area :event_description %>
+								</p>
+								<p>
+									<%= f.label :date %><br>
+									<%= f.date_select :date %>
+								</p>
+								<p>
+									<%= f.label :start_time %><br>
+									<%= f.text_field :start_time %>
+								</p>
+								<p>
+									<%= f.submit %>
+								</p>
+							<% end %>
+					</div><div classs='clear'></div>
+					<% elsif current_user.friends.include?(@event.user) %>
+								<h2>
+								<h3><%=h @event.event_name %></h3> 
+								<p align='center'><%=h @event.start_time %>, <%= @event.date.strftime('%m-%d-%y') %> 
+								</p>
+								<div id='event'>
+									<%=h @event.event_description %><br>
+								</div>
+					<% else %>
+						<h5>You must be friends with the user that created this event to see it.</h5>
+					<% end %>
+				</div>
+			<div class='right_side'>
+				
+			</div>
+		<br clear="all" /></div>
+		<div class='footer' align='center'>
+		</div>
+		<%= render 'users/footer' %>
+	</body>
+</html>

@@ -1,0 +1,26 @@
+	<% unless @user.pending_friends.empty? %>
+		<h3>Requested by:</h3>
+		<ul id="user_list">
+		<% @user.pending_friends.each do |user| %>
+				<% if @user = current_user %>
+					<li>
+						<% if user.avatar.file? %>
+							<%= image_tag user.avatar.url(:thumb) %>
+						<% else %>
+							<img src="assets/images/nopic2.gif">
+						<% end %>
+						<div class="user_message_container">
+							<%= link_to "#{user.username.capitalize}", "/#{user.username}" %>
+							<div class='button'>
+								<%= link_to '[Accept]', friendship_path(:user_id => current_user, :id => user), :method => :put %> |
+								<%= link_to '[Reject]', friendship_path(:user_id => current_user, :id => user), :method => :delete, :confirm => 'Reject friend request! Are you sure?' %>
+							</div>
+							<div class="time_ago">
+								<%= time_ago_in_words user.created_at %> ago
+							</div>
+						</div><div class='clear'></div>
+					</li>
+			<% end %>
+		<% end %>
+	<% end %>
+</ul>

@@ -1,0 +1,27 @@
+<% unless current_user.friends.empty? %>
+	<h3>Friends</h3>
+	<ul id="user_list">
+		<% for user in @friends %>
+			<li>
+				<% if user.avatar.file? %>
+					<%= link_to image_tag user.avatar.url(:thumb).to_s %>
+				<% else %>
+					<img src="assets/nopic2.png">
+				<% end %>
+				<div class="user_message_container">
+					<div class="button">
+						<%= link_to '[Remove]', friendship_path(:user_id => current_user, :id => user), :method => :delete, :confirm => 'Are you sure?' %>
+					</div>
+				<% if user.first_name.present? %>
+					<%= link_to user.first_name.capitalize, user.username %>
+				<% else %>
+					<%=h link_to user.username.capitalize, user.username %>
+				<% end %>
+					<%= user.about_us %>
+				</div>
+			<div class="clear"></div>
+		<% end %>
+	<br />
+		</li>
+	</ul> 
+<% end %>
